@@ -1,6 +1,5 @@
 $(document)
     .ready(function () {
-
         function generateUUID() {
             /*jshint bitwise:false */
             var i,
@@ -22,4 +21,35 @@ $(document)
         }
 
         // code to be implemented
-    });
+       $('#button').click(
+            function(){
+                var toAdd = $('input[name=ListItem]').val();
+                 $('ol').append("<li><input type='checkbox'" +  " class='todo-item-done'"+ 
+                         " value='" + toAdd + "' /> " +  toAdd + "</li>");
+            });
+       
+       $("input[name=ListItem]").keyup(function(event){
+          if(event.keyCode == 13){
+            $("#button").click();
+          }         
+      });
+      
+$(document).on('dblclick', 'li', function () {
+            $(this)
+                .children('span')
+                .attr('contentEditable', 'true')
+                .focus()
+   });
+     
+
+      $('ol').sortable();  
+      $(document).on('click', ".todo-item-done", completeTodoItem);
+       function completeTodoItem() {  
+         $(this).parent().toggleClass("strike");
+      }
+      
+    }
+      
+
+);
+
